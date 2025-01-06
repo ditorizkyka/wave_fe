@@ -25,28 +25,4 @@ class Modules {
       quiz: json['quiz'],
     );
   }
-
-  void setMateriID(int id) {
-    materiID = id;
-  }
-
-  void setTitle(String title) {
-    this.title = title;
-  }
-
-  void setContent(String content) {
-    this.content = content;
-  }
-
-  String getContent() => content;
-
-  String getTitle() => title;
-
-  int getMateriID() => materiID;
-
-  @override
-  int calculateScore() {
-    // Contoh implementasi score (bisa diganti dengan logika lain)
-    return content.length * 10; // Skor berdasarkan panjang konten
-  }
 }

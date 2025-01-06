@@ -24,33 +24,4 @@ class Course {
       modules: json['modules'],
     );
   }
-
-  // Methods
-  void setCourseID(int id) {
-    courseID = id;
-  }
-
-  void setTitle(String title) {
-    this.title = title;
-  }
-
-  void setDescription(String description) {
-    this.description = description;
-  }
-
-  // void setProgress(double progress) {
-  //   this.progress = progress;
-  // }
-
-  int getCourseID() => courseID;
-
-  String getTitle() => title;
-
-  String getDescription() => description;
-
-  // double getProgress() => progress;
-
-  void startCourse() {
-    print("Course '$title' has started!");
-  }
 }
