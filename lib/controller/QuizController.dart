@@ -40,8 +40,6 @@ class Quizcontroller extends GetxController {
         print(
             'Quiz loaded with ${quiz.value?.question?.length ?? 0} questions');
         print('Questions: ${quiz.value?.question?[1].questionType}');
-
-        // print(quiz.value?.question);
       }
     } catch (e) {
       print('Errorsss: $e');
