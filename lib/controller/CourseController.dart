@@ -2,8 +2,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
-
-import 'package:wave_education/model/CourseModel.dart';
+import 'package:wave_fe/model/CourseModel.dart';
 
 class CourseController extends GetxController {
   Rx<List<dynamic>?> courseList = Rx<List<dynamic>?>(null); // List<Course>

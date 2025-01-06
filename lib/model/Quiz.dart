@@ -1,8 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:wave_fe/model/Question.dart';
-import 'package:wave_fe/model/Scoreable.dart';
 
-class Quiz implements Scoreable {
+class Quiz {
   int quizID;
   int? materiID;
   int rewardPoints;

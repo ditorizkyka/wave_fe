@@ -7,8 +7,7 @@ import 'package:wave_fe/controller/ModulesController.dart';
 import 'package:wave_fe/controller/QuestionController.dart';
 import 'package:wave_fe/controller/QuizController.dart';
 import 'package:wave_fe/controller/UserController.dart';
-import 'package:wave_fe/view/core/auth/login_page/widget/form_auth_signup.dart';
-import 'package:wave_fe/view/widgets/information_dialog.dart';
+
 import 'package:wave_fe/view/widgets/main_footer.dart';
 import 'package:wave_fe/view/widgets/main_header.dart';
 import 'package:wave_fe/view/widgets/show_dialog.dart';

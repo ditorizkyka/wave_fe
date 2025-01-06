@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wave_education/view/core/auth/signup/widget/form_auth_signup.dart';
+import 'package:wave_fe/view/core/auth/signup/widget/form_auth_signup.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});

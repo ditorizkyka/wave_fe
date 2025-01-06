@@ -1,8 +1,8 @@
 // ignore_for_file: avoid_print
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wave_education/model/CourseModel.dart';
-import 'package:wave_education/model/User.dart';
+import 'package:wave_fe/model/CourseModel.dart';
+import 'package:wave_fe/model/User.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:get/get.dart'; // Import GetX

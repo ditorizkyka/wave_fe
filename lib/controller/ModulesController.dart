@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wave_education/controller/UserController.dart';
-import 'package:wave_education/model/Modules.dart';
+import 'package:wave_fe/controller/UserController.dart';
+import 'package:wave_fe/model/Modules.dart';
 
 class ModulesController extends GetxController {
   Rx<List<dynamic>?> courseModules = Rx<List<dynamic>?>(null);
