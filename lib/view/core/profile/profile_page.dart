@@ -1,0 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:wave_fe/controller/UserController.dart';
+import 'package:wave_fe/view/widgets/form_attribute.dart';
+import 'package:wave_fe/view/widgets/information_dialog.dart';
+import 'package:wave_fe/view/widgets/main_footer.dart';
+import 'package:wave_fe/view/widgets/main_header.dart';
+import 'package:wave_fe/view/widgets/show_dialog.dart';

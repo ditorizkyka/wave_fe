@@ -1,0 +1,15 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wave_fe/controller/CourseController.dart';
+import 'package:wave_fe/controller/ModulesController.dart';
+import 'package:wave_fe/controller/QuestionController.dart';
+import 'package:wave_fe/controller/QuizController.dart';
+import 'package:wave_fe/controller/UserController.dart';
+import 'package:wave_fe/model/Modules.dart';
+import 'package:wave_fe/view/widgets/information_dialog.dart';
+import 'package:wave_fe/view/widgets/main_footer.dart';
+import 'package:wave_fe/view/widgets/main_header.dart';
+import 'package:wave_fe/view/widgets/show_dialog.dart';
