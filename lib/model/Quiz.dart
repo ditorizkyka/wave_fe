@@ -13,11 +13,6 @@ class Quiz {
       required this.rewardPoints,
       this.question});
 
-  @override
-  int calculateScore() {
-    return 0;
-  }
-
   factory Quiz.fromJson(Map<String, dynamic> json) {
     return Quiz(
       quizID: json['quizId'],

@@ -15,7 +15,6 @@ class User {
       this.token,
       this.courseEnrolled});
 
-  // Factory constructor untuk membuat User dari JSON
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       token: json['accessToken'],
@@ -25,6 +24,4 @@ class User {
       courseEnrolled: json['enrolledCourses'],
     );
   }
-
-  // set enrolledCourses(List<Course> enrolledCourses) {}
 }

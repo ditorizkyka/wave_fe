@@ -5,7 +5,6 @@ class Course {
   String title;
   String description;
   int? pointEarned;
-  // double progress;
   List<Modules>? modules = [];
 
   Course({
@@ -16,8 +15,6 @@ class Course {
     this.pointEarned,
     this.modules,
   });
-
-  // from json
 
   factory Course.fromJson(Map<String, dynamic> json) {
     return Course(

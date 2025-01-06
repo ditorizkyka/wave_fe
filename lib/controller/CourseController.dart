@@ -9,36 +9,29 @@ class CourseController extends GetxController {
   Rx<Course?> course = Rx<Course?>(null);
   Rx<int?> courseLength = Rx<int?>(null);
 
-  // Menyimpan status loading
   RxBool isLoading = false.obs;
-
-  // BUAT Section di dashboard All Course sebelum di enroll
   Future<void> getAllCourse() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('userToken') ?? '';
     try {
-      isLoading.value = true; // Menandakan data sedang diambil
+      isLoading.value = true;
       final response = await http
           .get(Uri.parse('http://192.168.56.1:8080/api/courses/all'), headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${token}'
       });
 
-      // Mengecek apakah response berhasil (status code 200)
       if (response.statusCode == 302) {
-        // Jika berhasil, konversikan data JSON menjadi objek User
         List<dynamic> data = jsonDecode(response.body);
         courseLength.value = data.length;
-        courseList.value = data; // Simpan user yang berhasil diambil
+        courseList.value = data;
       } else {
-        // Jika gagal, tampilkan pesan kesalahan
         print('Failed to load user data: ${response.statusCode}');
       }
     } catch (e) {
-      // Menangani error jika request gagal
       print('Error: $e');
     } finally {
-      isLoading.value = false; // Menandakan data telah selesai diambil
+      isLoading.value = false;
     }
   }
 
@@ -46,7 +39,7 @@ class CourseController extends GetxController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('userToken') ?? '';
     try {
-      isLoading.value = true; // Menandakan data sedang diambil
+      isLoading.value = true;
       final response = await http.get(
           Uri.parse('http://192.168.56.1:8080/api/courses/${id}'),
           headers: {
@@ -54,20 +47,17 @@ class CourseController extends GetxController {
             'Authorization': 'Bearer $token'
           });
 
-      // Mengecek apakah response berhasil (status code 200)
       if (response.statusCode == 302) {
         Map<String, dynamic> data = jsonDecode(response.body);
         Course courseData = Course.fromJson(data);
         course.value = courseData;
       } else {
-        // Jika gagal, tampilkan pesan kesalahan
         print('Failed to load user data: ${response.statusCode}');
       }
     } catch (e) {
-      // Menangani error jika request gagal
       print('Error: $e');
     } finally {
-      isLoading.value = false; // Menandakan data telah selesai diambil
+      isLoading.value = false;
     }
   }
 }

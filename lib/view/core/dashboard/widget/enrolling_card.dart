@@ -94,19 +94,13 @@ class EnrollingCard extends StatelessWidget {
                         title: 'Enroll Course',
                         message: 'Do you want to enroll in this course?',
                         onConfirm: () async {
-                          // Proses enroll course
                           final userController = Get.put(UserController());
                           final response =
                               await userController.enrollCourse(courseId ?? 0);
                           userController.getUserEnrolledCoursesById();
 
                           if (response.statusCode == 200) {
-                            // Berhasil, tampilkan snackbar dan refresh
-                            // context.goNamed('dashboard');
-
-                            // menutup dialog confirm dialog
                             Navigator.pop(context);
-                            // Tutup dialog
                             showDialog(
                                 context: context,
                                 builder: (context) {
@@ -116,10 +110,7 @@ class EnrollingCard extends StatelessWidget {
                                         "You have successfully enrolled in the course.",
                                   );
                                 });
-
-                            // Lakukan refresh halaman
                           } else {
-                            // Gagal, tampilkan pesan error
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content:
@@ -131,7 +122,6 @@ class EnrollingCard extends StatelessWidget {
                           }
                         },
                         onCancel: () {
-                          // Handle cancel
                           Navigator.pop(context);
                         },
                       ),
@@ -158,7 +148,6 @@ class ContainerNews extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        // border radius
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
           color: const Color(0xFFD4E1FF),

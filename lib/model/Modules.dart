@@ -26,11 +26,6 @@ class Modules {
     );
   }
 
-  // Methods
-  void showMateri() {
-    print("Materi: $title\nDescription: $description\nContent: $content");
-  }
-
   void setMateriID(int id) {
     materiID = id;
   }

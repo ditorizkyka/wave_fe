@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 
 class QuestionController extends GetxController {
-  // For single selection (radio buttons)
   final Rx<String> selectedSingleAnswer = ''.obs;
   final RxList<String> selectedMultipleValues = <String>[].obs;
 
