@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'package:wave_education/model/Question.dart';
-import 'package:wave_education/model/Quiz.dart';
+import 'package:wave_fe/model/Question.dart';
+import 'package:wave_fe/model/Quiz.dart';
 
 class Quizcontroller extends GetxController {
   Rx<Quiz?> quiz = Rx<Quiz?>(null);
@@ -36,13 +36,9 @@ class Quizcontroller extends GetxController {
         print(
             'Quiz loaded with ${quiz.value?.question?.length ?? 0} questions');
         print('Questions: ${quiz.value?.question}');
-
-        // print(quiz.value?.question);
       }
     } catch (e) {
       print('Error: $e');
     }
   }
-
-  // Future<void> submitQuiz() {}
 }

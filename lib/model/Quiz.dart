@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
+import 'package:wave_fe/model/Question.dart';
+import 'package:wave_fe/model/Scoreable.dart';
 
-class Quiz {
+class Quiz implements Scoreable {
   int quizID;
   int? materiID;
   int rewardPoints;
@@ -11,6 +13,11 @@ class Quiz {
       this.materiID,
       required this.rewardPoints,
       this.question});
+
+  @override
+  int calculateScore() {
+    return 0;
+  }
 
   factory Quiz.fromJson(Map<String, dynamic> json) {
     return Quiz(
