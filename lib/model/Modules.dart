@@ -1,10 +1,6 @@
-// Interface Scoreable
+import 'package:wave_fe/model/Quiz.dart';
 
-// Class Modules
-import 'package:wave_education/model/Quiz.dart';
-import 'package:wave_education/model/Scoreable.dart';
-
-class Modules implements Scoreable {
+class Modules {
   int materiID;
   String title;
   String description;

@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:wave_education/model/Question.dart';
 
 class Quiz {
   int quizID;

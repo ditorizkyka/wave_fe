@@ -1,5 +1,5 @@
 // ignore: file_names
-import 'package:wave_education/model/CourseModel.dart';
+import 'package:wave_fe/model/CourseModel.dart';
 
 class User {
   int userID;

@@ -1,70 +1,59 @@
-// Interface Scoreable
+import 'package:wave_fe/model/Modules.dart';
 
-// Class Modules
-import 'package:wave_education/model/Quiz.dart';
-import 'package:wave_education/model/Scoreable.dart';
-
-class Modules implements Scoreable {
-  int materiID;
+class Course {
+  int courseID;
   String title;
   String description;
-  String content;
-  // DateTime createdAt;
-  Quiz? quiz;
+  int? pointEarned;
+  // double progress;
+  List<Modules>? modules = [];
 
-  Modules({
-    this.quiz,
-    required this.materiID,
+  Course({
+    required this.courseID,
     required this.title,
     required this.description,
-    required this.content,
-    // required this.createdAt,
+    // required this.progress,
+    this.pointEarned,
+    this.modules,
   });
 
-  // FACTORY
-  factory Modules.fromJson(Map<String, dynamic> json) {
-    return Modules(
-      materiID: json['moduleId'],
+  // from json
+
+  factory Course.fromJson(Map<String, dynamic> json) {
+    return Course(
+      courseID: json['courseId'],
       title: json['title'],
       description: json['description'],
-      content: json['content'],
-      quiz: json['quiz'],
-      // createdAt: DateTime.parse(json['createdAt']),
+      modules: json['modules'],
     );
   }
 
   // Methods
-  void showMateri() {
-    print("Materi: $title\nDescription: $description\nContent: $content");
-  }
-
-  void setMateriID(int id) {
-    materiID = id;
+  void setCourseID(int id) {
+    courseID = id;
   }
 
   void setTitle(String title) {
     this.title = title;
   }
 
-  void setContent(String content) {
-    this.content = content;
+  void setDescription(String description) {
+    this.description = description;
   }
 
-  // void setCreatedAt(DateTime date) {
-  //   createdAt = date;
+  // void setProgress(double progress) {
+  //   this.progress = progress;
   // }
 
-  // DateTime getCreatedAt() => createdAt;
-
-  String getContent() => content;
+  int getCourseID() => courseID;
 
   String getTitle() => title;
 
-  int getMateriID() => materiID;
+  String getDescription() => description;
 
-  @override
-  int calculateScore() {
-    // Contoh implementasi score (bisa diganti dengan logika lain)
-    return content.length * 10; // Skor berdasarkan panjang konten
+  // double getProgress() => progress;
+
+  void startCourse() {
+    print("Course '$title' has started!");
   }
 }
