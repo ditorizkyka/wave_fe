@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'dart:html' as html;
-// import google fonts
 import 'package:wave_fe/view/core/dashboard/dashboard_page.dart';
 import 'package:wave_fe/view/routes/routes.dart';
 import 'package:wave_fe/view/widgets/main_header.dart';
@@ -13,13 +11,8 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    html.window.onPopState.listen((event) {
-      // Cegah navigasi kembali
-      html.window.history.pushState(null, '', html.window.location.href);
-    });
     return GetMaterialApp.router(
       debugShowCheckedModeBanner: false,
       routeInformationParser: router.routeInformationParser,
