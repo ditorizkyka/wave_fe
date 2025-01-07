@@ -26,7 +26,6 @@ class ModuleDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Initialize controllers
     final moduleController = Get.put(ModulesController());
     final userController = Get.put(UserController());
     final courseController = Get.put(CourseController());
@@ -43,13 +42,10 @@ class ModuleDetailPage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              // Wrap the module details in Obx
               Obx(() {
-                // Access the reactive module variable directly
                 Modules? module = moduleController.module.value;
 
                 if (module == null) {
-                  // Show a loading indicator while the module is being fetched
                   moduleController.getModuleByIdOnSpecifiedCourse(
                     userController.user.value?.userID ?? 0,
                     int.parse(courseId),
@@ -62,10 +58,7 @@ class ModuleDetailPage extends StatelessWidget {
                   );
                 }
 
-                // Fetch quiz for the module
-                // Ideally, this should be handled inside the controller to avoid multiple calls
                 quizController.getQuizOnSpecifiedModule(module.materiID);
-                // print(quizController.quiz.value?.question?[0].questionText);
 
                 return Padding(
                   padding: const EdgeInsets.all(50),
@@ -162,19 +155,10 @@ class ModuleDetailPage extends StatelessWidget {
                                           }
                                         },
                                         onCancel: () {
-                                          // Handle cancel
                                           Navigator.pop(context);
                                         },
                                       ),
                                     );
-
-                                    // context.goNamed(
-                                    //   "module",
-                                    //   pathParameters: {
-                                    //     "courseId": courseId,
-                                    //     "moduleId": moduleId,
-                                    //   },
-                                    // );
                                   },
                                   child: Text(
                                     'Quiz',

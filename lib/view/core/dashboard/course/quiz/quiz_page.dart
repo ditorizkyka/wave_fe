@@ -29,7 +29,6 @@ class QuizPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Parse current question ID, default ke 1 jika null
     int currentQuestionId = int.tryParse(questionPathId ?? "1") ?? 1;
     final questionController = Get.put(QuestionController());
     final quizController = Get.put(Quizcontroller());
@@ -94,17 +93,13 @@ class QuizPage extends StatelessWidget {
                                               "Cannot Load this Option"),
                                           value: question
                                               ?.option?[index].optionText,
-                                          // Nilai unik untuk setiap radio button
                                           groupValue: questionController
-                                              .selectedSingleAnswer
-                                              .value, // Nilai terpilih
+                                              .selectedSingleAnswer.value,
                                           onChanged: (value) {
-                                            // FUNGSINYA BUAT NGUBAH TAMPILAN PILIHAN GANDA
                                             questionController
                                                 .selectedSingleAnswer
                                                 .value = value.toString();
 
-                                            // FUNGSINYA BUAT NGEBENTUK OBJEK TIAP ANSWER
                                             questionController
                                                 .singleAnswerObject.value = {
                                               'optionId': question
@@ -200,8 +195,7 @@ class QuizPage extends StatelessWidget {
                                           return RemainingQuestion(
                                             number: (index + 1).toString(),
                                             isSelected: currentQuestionId + 1 ==
-                                                (index +
-                                                    1), // Cek jika item ini terpilih
+                                                (index + 1),
                                           );
                                         }),
                                       ),
@@ -241,13 +235,10 @@ class QuizPage extends StatelessWidget {
                                           questionController
                                               .multipleAnswerObject.value = [];
                                         }
-
-                                        // Navigasi ke pertanyaan berikutnya
                                         String nextQuestion =
                                             (currentQuestionId + 1).toString();
 
                                         if (nextQuestion == '5') {
-                                          // print("quiz selesai");
                                           print(
                                               "JAWABAN : ${quizController.answers.value}");
                                           final userController =

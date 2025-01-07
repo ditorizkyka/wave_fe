@@ -47,7 +47,6 @@ class ModulesController extends GetxController {
           List<Modules> modules =
               data.map((data) => Modules.fromJson(data)).toList();
 
-          // Safely update the user's enrolled course modules
           if (userController.user.value?.courseEnrolled != null &&
               courseId <
                   (userController.user.value?.courseEnrolled?.length ?? 0)) {
