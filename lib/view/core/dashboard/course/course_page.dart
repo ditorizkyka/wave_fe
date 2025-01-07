@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wave_fe/controller/CourseController.dart';
+import 'package:wave_fe/controller/UserController.dart';
+import 'package:wave_fe/view/core/dashboard/dashboard_page.dart';
+import 'package:wave_fe/view/core/dashboard/widget/enrolling_card.dart';
 import 'package:wave_fe/view/widgets/main_footer.dart';
 import 'package:wave_fe/view/widgets/main_header.dart';
 
@@ -10,6 +15,10 @@ class CoursePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userController = Get.put(UserController());
+    final courseController = Get.put(CourseController());
+    courseController.getAllCourse();
+    userController.getUserById();
     double widthScreen = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: const PreferredSize(
@@ -19,29 +28,13 @@ class CoursePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            TopCourses(widthScreen: widthScreen),
-            Padding(
-                padding: const EdgeInsets.all(50),
+            TopCourses(
+                widthScreen: widthScreen, courseController: courseController),
+            const Padding(
+                padding: EdgeInsets.all(50),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "All Courses",
-                      style: GoogleFonts.poppins(
-                          color: Colors.black,
-                          fontSize: 30,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    const SizedBox(height: 20),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        // CoursesCard(),
-                        // CoursesCard(),
-                        // CoursesCard(),
-                      ],
-                    )
-                  ],
+                  children: [SizedBox(height: 20), SectionEnrolledCourse()],
                 )),
             SizedBox(height: 50),
             MainFooter()
@@ -53,7 +46,9 @@ class CoursePage extends StatelessWidget {
 }
 
 class TopCourses extends StatelessWidget {
+  final CourseController courseController;
   const TopCourses({
+    required this.courseController,
     super.key,
     required this.widthScreen,
   });
@@ -64,7 +59,7 @@ class TopCourses extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: widthScreen,
-      height: 460,
+      // height: 460,
       color: const Color(0xFF4366DE),
       child: Container(
         padding: const EdgeInsets.all(50),
@@ -79,13 +74,32 @@ class TopCourses extends StatelessWidget {
                   fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 20),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                PopularCourseCard(),
-                PopularCourseCard(),
-                PopularCourseCard(),
-              ],
+            GridView.builder(
+              shrinkWrap: true,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3, // Jumlah kolom dalam grid
+                crossAxisSpacing: 10, // Jarak antar kolom
+                mainAxisSpacing: 10, // Jarak antar baris
+              ),
+              itemCount: courseController.courseList.value?.length ??
+                  0, // Jumlah total item yang akan ditampilkan
+              itemBuilder: (BuildContext context, int index) {
+                final course = courseController.courseList
+                    .value?[index]; // Mengakses elemen berdasarkan index
+                if (course == null) {
+                  return const SizedBox
+                      .shrink(); // Jika null, tampilkan widget kosong
+                }
+                return EnrollingCard(
+                  disableButton: true,
+                  image: index % 2 == 0
+                      ? 'assets/images/genap.png' // Gambar untuk indeks genap
+                      : 'assets/images/ganjil.png',
+                  courseId: course['courseId'],
+                  courseName: course['title'],
+                  courseDesc: course['description'],
+                );
+              },
             )
           ],
         ),

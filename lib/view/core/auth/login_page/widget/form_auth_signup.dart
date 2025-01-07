@@ -101,6 +101,7 @@ class FormAuthSignIn extends StatelessWidget {
                                   // ignore: use_build_context_synchronously
                                   context: context,
                                   builder: (context) => InformationDialog(
+                                    image: 0,
                                     title: "Login Failed",
                                     message:
                                         "Please Email or password is incorrect",

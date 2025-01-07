@@ -11,7 +11,6 @@ class UserController extends GetxController {
   Rx<User?> user = Rx<User?>(null);
   // Rx<List?> enrolledCourses = Rx<List?>(null);
 
-  // Menyimpan status loading
   RxBool isLoading = false.obs;
 
   Future<void> getUserById() async {
@@ -29,7 +28,7 @@ class UserController extends GetxController {
       if (response.statusCode == 302) {
         Map<String, dynamic> data = jsonDecode(response.body);
         print("data : $data");
-        user.value = User.fromJson(data); // Simpan user yang berhasil diambil
+        user.value = User.fromJson(data);
       } else {
         print('Failed to load user data: ${response.statusCode}');
       }

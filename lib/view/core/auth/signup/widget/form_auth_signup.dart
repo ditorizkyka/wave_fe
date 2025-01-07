@@ -22,6 +22,7 @@ class FormAuthSignUp extends StatelessWidget {
     TextEditingController fullnameController = TextEditingController();
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
+    TextEditingController confirmPasswordController = TextEditingController();
     return SizedBox(
       // height: heightScreen * 0.82,
       width: 300,
@@ -84,7 +85,8 @@ class FormAuthSignUp extends StatelessWidget {
                   isObsecure: true,
                 ),
                 const SizedBox(height: 13),
-                const FormAttribute(
+                FormAttribute(
+                  controller: confirmPasswordController,
                   title: "Confirm Password",
                   hintText: "Enter your confirm password",
                   isObsecure: true,
@@ -102,20 +104,71 @@ class FormAuthSignUp extends StatelessWidget {
                     ),
                     onPressed: () async {
                       final user = Get.put(UserController());
-                      http.Response response = await user.register(
-                          fullnameController.text,
-                          emailController.text,
-                          passwordController.text);
-
-                      if (response.statusCode == 200) {
-                        context.goNamed("login");
-                      } else {
+                      if (!GetUtils.isEmail(emailController.text)) {
                         showDialog(
+                          context: context,
+                          builder: (context) => InformationDialog(
+                            image: 0,
+                            title: "Sign Up Failed",
+                            message: "please enter a valid email",
+                          ),
+                        );
+                      }
+
+                      if (passwordController.text !=
+                          confirmPasswordController.text) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => InformationDialog(
+                            image: 0,
+                            title: "Sign Up Failed",
+                            message:
+                                "Your password does not match! Please try again",
+                          ),
+                        );
+                      }
+
+                      if (passwordController.text.isEmpty &&
+                          emailController.text.isEmpty) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => InformationDialog(
+                            image: 0,
+                            title: "Sign Up Failed",
+                            message: "you must enter your email and password",
+                          ),
+                        );
+                      }
+
+                      if ((passwordController.text ==
+                              confirmPasswordController.text) &&
+                          GetUtils.isEmail(emailController.text)) {
+                        http.Response response = await user.register(
+                            fullnameController.text,
+                            emailController.text,
+                            passwordController.text);
+
+                        if (response.statusCode == 200) {
+                          showDialog(
                             context: context,
                             builder: (context) => InformationDialog(
-                                  title: "Sign Up Failed",
-                                  message: response.body,
-                                ));
+                              image: 1,
+                              title: "Sign Up Success",
+                              message:
+                                  "Please login to continue with your new Account",
+                            ),
+                          );
+                          context.goNamed("login");
+                        } else {
+                          showDialog(
+                            context: context,
+                            builder: (context) => InformationDialog(
+                              image: 0,
+                              title: "Sign Up Failed",
+                              message: response.body,
+                            ),
+                          );
+                        }
                       }
                     },
                     child: Text(

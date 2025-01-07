@@ -11,8 +11,10 @@ class EnrollingCard extends StatelessWidget {
   String? courseName;
   String? courseDesc;
   String image;
+  bool disableButton;
 
   EnrollingCard({
+    required this.disableButton,
     required this.image,
     this.courseId,
     this.courseDesc,
@@ -63,6 +65,9 @@ class EnrollingCard extends StatelessWidget {
             Text(
               courseDesc ?? "null",
               style: GoogleFonts.poppins(fontSize: 12, color: Colors.grey),
+              maxLines: 3, // Batas maksimal 3 baris
+              overflow: TextOverflow
+                  .ellipsis, // Menampilkan '...' di akhir jika teks terlalu panjang
             ),
             const SizedBox(height: 10),
             ListTile(
@@ -79,59 +84,64 @@ class EnrollingCard extends StatelessWidget {
                           fit: BoxFit.cover),
                     )),
                 title: Text("Admin", style: GoogleFonts.poppins(fontSize: 12)),
-                trailing: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.amber[400],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    shadowColor: Colors.grey,
-                  ),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => ConfirmDialog(
-                        title: 'Enroll Course',
-                        message: 'Do you want to enroll in this course?',
-                        onConfirm: () async {
-                          final userController = Get.put(UserController());
-                          final response =
-                              await userController.enrollCourse(courseId ?? 0);
-                          userController.getUserEnrolledCoursesById();
+                trailing: disableButton
+                    ? null
+                    : ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.amber[400],
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          shadowColor: Colors.grey,
+                        ),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => ConfirmDialog(
+                              buttonText: "Enroll",
+                              title: 'Enroll Course',
+                              message: 'Do you want to enroll in this course?',
+                              onConfirm: () async {
+                                final userController =
+                                    Get.put(UserController());
+                                final response = await userController
+                                    .enrollCourse(courseId ?? 0);
+                                userController.getUserEnrolledCoursesById();
 
-                          if (response.statusCode == 200) {
-                            Navigator.pop(context);
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return InformationDialog(
-                                    title: "Success",
-                                    message:
-                                        "You have successfully enrolled in the course.",
+                                if (response.statusCode == 200) {
+                                  Navigator.pop(context);
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return InformationDialog(
+                                          image: 1,
+                                          title: "Success",
+                                          message:
+                                              "You have successfully enrolled in the course.",
+                                        );
+                                      });
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                          "Enrollment failed: ${response.body}"),
+                                      backgroundColor: Colors.red,
+                                    ),
                                   );
-                                });
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content:
-                                    Text("Enrollment failed: ${response.body}"),
-                                backgroundColor: Colors.red,
-                              ),
-                            );
-                            Navigator.pop(context); // Tutup dialog
-                          }
+                                  Navigator.pop(context); // Tutup dialog
+                                }
+                              },
+                              onCancel: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          );
                         },
-                        onCancel: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    );
-                  },
-                  child: const Text("Enroll",
-                      style: TextStyle(
-                        color: Colors.white,
+                        child: const Text("Enroll",
+                            style: TextStyle(
+                              color: Colors.white,
+                            )),
                       )),
-                )),
           ],
         ),
       ),

@@ -24,25 +24,13 @@ class ModuleDetailPage extends StatelessWidget {
     super.key,
   });
 
-  Future<String> getUid() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('uid') ?? '';
-  }
-
   @override
   Widget build(BuildContext context) {
     // Initialize controllers
     final moduleController = Get.put(ModulesController());
     final userController = Get.put(UserController());
     final courseController = Get.put(CourseController());
-
     courseController.getCourseById(int.parse(courseId) + 1);
-
-    print("user nya ada : ${userController.user.value?.userID}");
-    print(
-        "usernya punya course ini : ${courseController.course.value?.courseID}");
-
-    final questionController = Get.put(QuestionController());
     final quizController = Get.put(Quizcontroller());
 
     double widthScreen = MediaQuery.of(context).size.width;
@@ -146,10 +134,10 @@ class ModuleDetailPage extends StatelessWidget {
                                     showDialog(
                                       context: context,
                                       builder: (context) => ConfirmDialog(
-                                        title:
-                                            'Do you want to Explore this module?',
+                                        buttonText: "Take Quiz",
+                                        title: 'Do you want to take Quiz?',
                                         message:
-                                            'use your point to explore this module and do quiz for other module unlocked!',
+                                            'You will not be able to go back and Quiz will only be available next without previous',
                                         onConfirm: () async {
                                           if (quizController.quiz.value !=
                                               null) {
@@ -164,6 +152,7 @@ class ModuleDetailPage extends StatelessWidget {
                                               context: context,
                                               builder: (context) {
                                                 return InformationDialog(
+                                                  image: 0,
                                                   title:
                                                       "Cannot open this quiz",
                                                   message: "Eror occured",

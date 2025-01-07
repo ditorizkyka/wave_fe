@@ -77,7 +77,7 @@ class CourseDetailPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "${coursesDetail.title} point user ${userController.user.value?.courseEnrolled?[parsedCourseId].pointEarned}",
+                          coursesDetail.title,
                           style: GoogleFonts.poppins(
                               fontSize: 30, fontWeight: FontWeight.w700),
                         ),
@@ -158,6 +158,7 @@ class ModulesContent extends StatelessWidget {
             context: context,
             builder: (context) {
               return InformationDialog(
+                image: 0,
                 title: "Cannot open this Module",
                 message: "You aren't have enough point.",
               );

@@ -69,6 +69,9 @@ class CoursesCard extends StatelessWidget {
               Text(
                 course?.description ?? "null",
                 style: GoogleFonts.poppins(fontSize: 12, color: Colors.grey),
+                maxLines: 3, // Batas maksimal 3 baris
+                overflow: TextOverflow
+                    .ellipsis, // Menampilkan '...' di akhir jika teks terlalu panjang
               ),
               const SizedBox(height: 10),
               ListTile(
@@ -87,57 +90,8 @@ class CoursesCard extends StatelessWidget {
                 title: Text("Admin", style: GoogleFonts.poppins(fontSize: 12)),
               ),
               const SizedBox(height: 10),
-              LinearProgressIndicator(
-                value: 0.33, // Nilai progress (0.0 hingga 1.0)
-                backgroundColor: Colors.grey[300], // Warna latar belakang
-                color: const Color(0xFF49BBBD), // Warna progress
-                minHeight: 4, // Tinggi bar
-              ),
-              const SizedBox(height: 10),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Text("50% Kursus telah selesai",
-                    style:
-                        GoogleFonts.poppins(fontSize: 12, color: Colors.grey)),
-              ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class ContainerNews extends StatelessWidget {
-  const ContainerNews({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        // border radius
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          color: const Color(0xFFD4E1FF),
-        ),
-        width: MediaQuery.of(context).size.width,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text("Tren Penggunaan Bahasa Pemrograman Tahun Ini",
-                style: GoogleFonts.poppins(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w700,
-                  color: const Color(0xFF4366DE),
-                )),
-            const SizedBox(height: 20),
-            Text(
-                "JavaScript (JS) menduduki posisi teratas dengan 62.3% pengguna, menjadikannya bahasa pemrograman paling banyak digunakan.\n\n HTML/CSS mengikuti dengan 52.9%, yang mendukung pengembangan front-end dan desain web.",
-                style: GoogleFonts.poppins(fontSize: 21)),
-          ]),
         ),
       ),
     );

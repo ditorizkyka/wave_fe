@@ -105,6 +105,7 @@ class SectionEnrollCourse extends StatelessWidget {
                     .shrink(); // Jika null, tampilkan widget kosong
               }
               return EnrollingCard(
+                disableButton: false,
                 image: index % 2 == 0
                     ? 'assets/images/genap.png' // Gambar untuk indeks genap
                     : 'assets/images/ganjil.png',

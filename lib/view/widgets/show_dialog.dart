@@ -6,8 +6,10 @@ class ConfirmDialog extends StatelessWidget {
   final String message;
   final VoidCallback onConfirm;
   final VoidCallback onCancel;
+  final String buttonText;
 
   const ConfirmDialog({
+    required this.buttonText,
     Key? key,
     this.title = 'Confirm',
     this.message = 'Are you sure?',
@@ -36,6 +38,7 @@ class ConfirmDialog extends StatelessWidget {
                 fontWeight: FontWeight.w700,
                 color: Colors.black,
               ),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 10),
             Text(
@@ -81,7 +84,7 @@ class ConfirmDialog extends StatelessWidget {
                   ),
                   onPressed: onConfirm,
                   child: Text(
-                    "Enroll",
+                    buttonText,
                     style: GoogleFonts.poppins(
                       fontSize: 13,
                       fontWeight: FontWeight.w400,

@@ -10,6 +10,7 @@ class Quizcontroller extends GetxController {
   Rx<Quiz?> quiz = Rx<Quiz?>(null);
   Rx<List<Object>> answers = Rx<List<Object>>([]);
   RxBool isLoading = false.obs;
+  Rx<bool?> passed = Rx<bool?>(null);
 
   Future<void> getQuizOnSpecifiedModule(int moduleId) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -36,10 +37,6 @@ class Quizcontroller extends GetxController {
         quiz.value?.question = questionQuiz;
         quiz.value?.materiID = moduleId;
         quiz.value = quizModule;
-
-        print(
-            'Quiz loaded with ${quiz.value?.question?.length ?? 0} questions');
-        print('Questions: ${quiz.value?.question?[1].questionType}');
 
         // print(quiz.value?.question);
       }
@@ -76,8 +73,14 @@ class Quizcontroller extends GetxController {
           'userAnswers': userAnswers
         }),
       );
-      print(response.body);
-      print(response.statusCode);
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseData = jsonDecode(response.body);
+
+        // Ambil nilai 'pass'
+        final bool isPass = responseData['pass'];
+        passed.value = isPass;
+      }
     } catch (e) {
       print('Error: $e');
     }

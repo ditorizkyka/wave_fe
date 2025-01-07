@@ -7,6 +7,7 @@ import 'package:wave_fe/controller/ModulesController.dart';
 import 'package:wave_fe/controller/QuestionController.dart';
 import 'package:wave_fe/controller/QuizController.dart';
 import 'package:wave_fe/controller/UserController.dart';
+import 'package:wave_fe/view/widgets/information_dialog.dart';
 
 import 'package:wave_fe/view/widgets/main_footer.dart';
 import 'package:wave_fe/view/widgets/main_header.dart';
@@ -228,9 +229,6 @@ class QuizPage extends StatelessWidget {
                                                 questionController
                                                     .singleAnswerObject.value
                                               ]);
-
-                                          print(
-                                              "questionController.singleAnswerObject.value : ${questionController.singleAnswerObject.value}");
                                         } else if (question?.questionType ==
                                             "MULTIPLE_CHOICE") {
                                           quizController.addAnswer(
@@ -239,8 +237,7 @@ class QuizPage extends StatelessWidget {
                                                   "MULTIPLE_CHOICE",
                                               questionController
                                                   .multipleAnswerObject.value);
-                                          print(
-                                              "questionController.multipleAnswerObject.value ${question?.questionId} : ${questionController.multipleAnswerObject.value}");
+
                                           questionController
                                               .multipleAnswerObject.value = [];
                                         }
@@ -256,28 +253,36 @@ class QuizPage extends StatelessWidget {
                                           final userController =
                                               Get.put(UserController());
 
-                                          quizController.submitQuiz(
-                                              userController.user.value!.userID,
-                                              quizController.quiz.value!.quizID,
-                                              courseController
-                                                  .course.value!.courseID,
-                                              quizController.answers.value);
-
-                                          quizController.answers.value = [];
-                                          questionController
-                                              .multipleAnswerObject.value = [];
-                                          questionController
-                                              .selectedSingleAnswer.value = '';
-                                          questionController
-                                              .selectedMultipleValues
-                                              .value = [];
                                           showDialog(
                                             context: context,
                                             builder: (context) => ConfirmDialog(
+                                              buttonText: "Submit",
                                               title: 'Submit Quiz?',
                                               message:
                                                   'Are you sure you want to submit this quiz?',
-                                              onConfirm: () async {
+                                              onConfirm: () {
+                                                quizController.submitQuiz(
+                                                    userController
+                                                        .user.value!.userID,
+                                                    quizController
+                                                        .quiz.value!.quizID,
+                                                    courseController
+                                                        .course.value!.courseID,
+                                                    quizController
+                                                        .answers.value);
+
+                                                quizController.answers.value =
+                                                    [];
+                                                questionController
+                                                    .multipleAnswerObject
+                                                    .value = [];
+                                                questionController
+                                                    .selectedSingleAnswer
+                                                    .value = '';
+                                                questionController
+                                                    .selectedMultipleValues
+                                                    .value = [];
+
                                                 context.goNamed("DBCourse",
                                                     pathParameters: {
                                                       "coursePathId":

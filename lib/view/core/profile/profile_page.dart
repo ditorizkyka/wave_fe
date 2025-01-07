@@ -125,6 +125,7 @@ class ProfilePage extends StatelessWidget {
                                     showDialog(
                                       context: context,
                                       builder: (context) => ConfirmDialog(
+                                        buttonText: "Save",
                                         title: 'Save changes?',
                                         message:
                                             'Proceed to save changes to your profile?',
@@ -142,6 +143,7 @@ class ProfilePage extends StatelessWidget {
                                                 context: context,
                                                 builder: (context) {
                                                   return InformationDialog(
+                                                    image: 1,
                                                     title: "Success",
                                                     message:
                                                         "You have successfully enrolled in the course.",
